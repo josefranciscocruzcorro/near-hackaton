@@ -1,0 +1,164 @@
+# =====================================================================
+# TESORERO — AI treasury agent for small businesses (NEAR HACKATHON).
+#
+# Golden rule: ONLY `nginx` publishes a port, on loopback (127.0.0.1:32080).
+# TLS is terminated by the host nginx (near.gesco.ec).
+#
+#   Internet ─► host nginx (443) ─► nearhk_nginx ─► nearhk_api ─► nearhk_pgbouncer ─► nearhk_postgres
+#                                        │              └──────────► nearhk_postgres (Hangfire + migrations, direct)
+#                                        └─► static PWA (frontend/dist)
+#
+# Every name carries the nearhk prefix so nothing collides with the other stacks
+# on the VPS (see docs/audits/2026-11-13-vps.md and ADR-0002). The same file runs two stacks:
+#   STACK=nearhk     PUBLIC_HTTP_PORT=32080 STACK_SUBNET=10.88.0.0/24  → public demo (SEED_DEMO=true)
+#   STACK=nearhklive PUBLIC_HTTP_PORT=32081 STACK_SUBNET=10.88.1.0/24  → real-money instance (SEED_DEMO=false)
+# =====================================================================
+
+name: ${STACK:-nearhk}
+
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: ${STACK:-nearhk}_nginx
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "${PUBLIC_BIND:-127.0.0.1}:${PUBLIC_HTTP_PORT:-32080}:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./frontend/dist:/usr/share/nginx/html:ro
+      # Demo videos and posters for the landing (not in git; uploaded by scripts/deploy.sh).
+      # Mounted beside the app bundle (its folder is read-only), served by `location /media/`.
+      - ./media:/usr/share/nginx/media:ro
+    mem_limit: 64m
+    networks:
+      - net
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        APP_VERSION: ${APP_VERSION:-dev}
+    image: ${STACK:-nearhk}-api
+    container_name: ${STACK:-nearhk}_api
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      pgbouncer:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Production}
+      # App → PgBouncer (transaction pooling).
+      ConnectionStrings__Default: "Host=pgbouncer;Port=6432;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD};Max Auto Prepare=0"
+      # Hangfire and migrations → Postgres direct (session locks / DDL).
+      ConnectionStrings__Hangfire: "Host=postgres;Port=5432;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}"
+      ConnectionStrings__Migrations: "Host=postgres;Port=5432;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}"
+      Jwt__SigningKey: ${JWT_SIGNING_KEY:?JWT_SIGNING_KEY is required}
+      Ai__ApiKey: ${DEEPSEEK_API_KEY:?DEEPSEEK_API_KEY is required}
+      Ai__ExtractionModel: ${AI_EXTRACTION_MODEL:-deepseek-flash}
+      Ai__PlannerModel: ${AI_PLANNER_MODEL:-deepseek-v4-pro}
+      Intents__Jwt: ${INTENTS_JWT:-}
+      Near__RpcUrl: ${NEAR_RPC_URL:-https://free.rpc.fastnear.com}
+      # Agent key for autonomous Live payments (ADR-0005). Generate it ON THE SERVER:
+      #   docker compose run --rm --no-deps api generate-agent-key >> .env
+      Near__AgentAccountId: ${NEAR_AGENT_ACCOUNT_ID:-}
+      Near__AgentPrivateKey: ${NEAR_AGENT_PRIVATE_KEY:-}
+      Seed__Demo: ${SEED_DEMO:-true}
+      # Multitenancy (ADR-0006): <slug>.TENANCY_BASE_DOMAIN → tenant; apex → landing; other hosts → demo tenant.
+      Tenancy__BaseDomain: ${TENANCY_BASE_DOMAIN:-tesorero.gesco.ec}
+      Tenancy__DefaultSlug: ${TENANCY_DEFAULT_SLUG:-demo}
+      Tenancy__KeyEncryptionKey: ${TENANCY_KEY_ENCRYPTION_KEY:-}
+      # Transactional e-mail (signup verification); empty host = e-mails go to the log.
+      Email__Host: ${EMAIL_HOST:-}
+      Email__Port: ${EMAIL_PORT:-465}
+      Email__UseTls: ${EMAIL_USE_TLS:-true}
+      Email__User: ${EMAIL_HOST_USER:-}
+      Email__Password: ${EMAIL_HOST_PASSWORD:-}
+      Email__From: ${DEFAULT_FROM_EMAIL:-}
+      Email__FromName: ${EMAIL_FROM_NAME:-Tesorero}
+      Seed__DemoPassword: ${SEED_DEMO_PASSWORD:-Demo!2026}
+      Seed__OrganizationName: ${SEED_ORGANIZATION_NAME:-Cafetería La Ceiba}
+      Seed__TreasuryAccountId: ${TREASURY_ACCOUNT_ID:-}
+      RateLimits__LoginPerMinute: ${RATE_LIMIT_LOGIN_PER_MINUTE:-10}
+      APP_VERSION: ${APP_VERSION:-dev}
+      APP_COMMIT: ${APP_COMMIT:-local}
+      APP_BUILT_AT: ${APP_BUILT_AT:-local}
+    volumes:
+      - dpkeys:/home/app/.aspnet/DataProtection-Keys
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+    mem_limit: 768m
+    networks:
+      - net
+
+  postgres:
+    image: postgres:17-alpine
+    container_name: ${STACK:-nearhk}_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-tesorero}
+      POSTGRES_USER: ${POSTGRES_USER:-tesorero}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256"
+    command: ["postgres", "-c", "max_connections=60", "-c", "shared_buffers=96MB"]
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-tesorero} -d ${POSTGRES_DB:-tesorero}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    mem_limit: 512m
+    networks:
+      - net
+
+  pgbouncer:
+    image: edoburu/pgbouncer:v1.23.1-p3
+    container_name: ${STACK:-nearhk}_pgbouncer
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: ${POSTGRES_USER:-tesorero}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB:-tesorero}
+      LISTEN_PORT: 6432
+      AUTH_TYPE: scram-sha-256
+      POOL_MODE: transaction
+      MAX_CLIENT_CONN: 200
+      DEFAULT_POOL_SIZE: 15
+      IGNORE_STARTUP_PARAMETERS: extra_float_digits,options
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -p 6432 -U ${POSTGRES_USER:-tesorero} || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    mem_limit: 64m
+    networks:
+      - net
+
+networks:
+  net:
+    name: ${STACK:-nearhk}_net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${STACK_SUBNET:-10.88.0.0/24}
+
+volumes:
+  postgres_data:
+    name: ${STACK:-nearhk}_postgres_data
+  dpkeys:
+    name: ${STACK:-nearhk}_dpkeys

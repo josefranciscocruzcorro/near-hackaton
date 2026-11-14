@@ -1,0 +1,3 @@
+target/
+# Artefactos de prueba: sólo se publica el wasm del treasury (y su ABI).
+res/mock_ft*

@@ -1,0 +1,7 @@
+[
+  {
+    "id": "s41-treasury-prepare",
+    "en": "She names her wallet as the owner and sets on-chain limits: fifty dollars per payment, one hundred per day. Even a hacked server could not go beyond them. This part runs on a local NEAR network; the transactions are the same as on mainnet.",
+    "es": "Indica su billetera como dueña y fija límites on-chain: cincuenta dólares por pago y cien al día. Ni un servidor hackeado podría superarlos. Esta parte corre en una red NEAR local; las transacciones son las mismas que en la red principal."
+  }
+]

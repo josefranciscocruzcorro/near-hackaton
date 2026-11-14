@@ -1,0 +1,197 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design tokens (docs/design/DESIGN.md). Raw values live in CSS variables so both themes
+   share the same utility classes; Tailwind utilities reference them via @theme inline. */
+:root {
+  --tz-bg: #fafaf9;
+  --tz-surface: #ffffff;
+  --tz-surface-2: #f5f5f4;
+  --tz-border: #e7e5e4;
+  --tz-fg: #1c1917;
+  --tz-muted: #6f6964;
+  --tz-accent: #0e9f6e;
+  /* AA-compliant accent for text and filled buttons on light surfaces (5.5:1 on white). */
+  --tz-accent-strong: #047857;
+  --tz-on-accent: #ffffff;
+  --tz-accent-soft: #e7f6ef;
+  --tz-warning: #b45309;
+  --tz-warning-soft: #fdf3e2;
+  --tz-danger: #b91c1c;
+  --tz-danger-soft: #fdeceb;
+  --tz-info: #1d4ed8;
+  --tz-info-soft: #eaf0fd;
+  --tz-overlay: rgb(12 10 9 / 0.45);
+  color-scheme: light;
+}
+
+.dark {
+  --tz-bg: #0b0b0c;
+  --tz-surface: #141416;
+  --tz-surface-2: #1c1c1f;
+  --tz-border: #26262a;
+  --tz-fg: #f5f5f4;
+  --tz-muted: #a1a1aa;
+  --tz-accent: #34d399;
+  --tz-accent-strong: #34d399;
+  --tz-on-accent: #04130d;
+  --tz-accent-soft: #10291f;
+  --tz-warning: #fbbf24;
+  --tz-warning-soft: #2a2010;
+  --tz-danger: #f87171;
+  --tz-danger-soft: #2c1414;
+  --tz-info: #93c5fd;
+  --tz-info-soft: #13213a;
+  --tz-overlay: rgb(0 0 0 / 0.6);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--tz-bg);
+  --color-surface: var(--tz-surface);
+  --color-surface-2: var(--tz-surface-2);
+  --color-border: var(--tz-border);
+  --color-fg: var(--tz-fg);
+  --color-muted: var(--tz-muted);
+  --color-accent: var(--tz-accent);
+  --color-accent-strong: var(--tz-accent-strong);
+  --color-on-accent: var(--tz-on-accent);
+  --color-accent-soft: var(--tz-accent-soft);
+  --color-warning: var(--tz-warning);
+  --color-warning-soft: var(--tz-warning-soft);
+  --color-danger: var(--tz-danger);
+  --color-danger-soft: var(--tz-danger-soft);
+  --color-info: var(--tz-info);
+  --color-info-soft: var(--tz-info-soft);
+  --color-overlay: var(--tz-overlay);
+}
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.8125rem;
+  --text-sm--line-height: 1.125rem;
+  --text-base: 0.875rem;
+  --text-base--line-height: 1.25rem;
+  --text-md: 1rem;
+  --text-md--line-height: 1.5rem;
+  --text-lg: 1.25rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.5rem;
+  --text-xl--line-height: 2rem;
+  --text-2xl: 2rem;
+  --text-2xl--line-height: 2.5rem;
+  --text-3xl: 2.75rem;
+  --text-3xl--line-height: 3.25rem;
+
+  --radius-card: 10px;
+  --radius-control: 8px;
+
+  --animate-fade-in: fade-in 160ms ease-out;
+  --animate-slide-up: slide-up 200ms ease-out;
+  --animate-slide-left: slide-left 200ms ease-out;
+  --animate-pulse-soft: pulse-soft 1.4s ease-in-out infinite;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slide-up {
+    from { transform: translateY(16px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes slide-left {
+    from { transform: translateX(24px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.55; }
+  }
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background: var(--tz-bg);
+    color: var(--tz-fg);
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    min-height: 100dvh;
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    background: var(--tz-bg);
+    color: var(--tz-fg);
+    font-feature-settings: 'cv11', 'ss01';
+  }
+  :focus-visible {
+    outline: 2px solid var(--tz-accent);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--tz-accent) 30%, transparent);
+  }
+  dialog {
+    color: inherit;
+    max-width: none;
+    max-height: none;
+  }
+  dialog::backdrop {
+    background: var(--tz-overlay);
+  }
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Landing (apex) decoration: a faint measuring grid and a mint glow behind the dark hero. */
+@layer components {
+  /* Anchors and focused fields stay clear of the sticky top bar. */
+  html:has(.landing-root) {
+    scroll-padding-top: 5rem;
+  }
+  .landing-grid {
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--tz-fg) 7%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--tz-fg) 7%, transparent) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 75% 70% at 70% 35%, #000 25%, transparent 75%);
+  }
+  .landing-glow {
+    background: radial-gradient(circle, color-mix(in srgb, var(--tz-accent) 26%, transparent) 0%, transparent 65%);
+    filter: blur(8px);
+  }
+}

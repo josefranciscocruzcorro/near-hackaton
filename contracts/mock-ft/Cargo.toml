@@ -1,0 +1,15 @@
+[package]
+name = "mock-ft"
+description = "Token NEP-141 minimo SOLO para pruebas de sandbox (no desplegar en mainnet)"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+rust-version.workspace = true
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+near-sdk = { workspace = true }
+near-contract-standards = { workspace = true }

@@ -1,0 +1,22 @@
+[workspace]
+resolver = "2"
+members = ["treasury", "mock-ft", "integration-tests"]
+
+[workspace.package]
+edition = "2021"
+license = "MIT"
+publish = false
+rust-version = "1.95"
+
+[workspace.dependencies]
+near-sdk = "=5.30.2"
+near-contract-standards = "=5.30.2"
+
+[profile.release]
+codegen-units = 1
+opt-level = "z"
+lto = true
+debug = false
+panic = "abort"
+# Mantener los checks de overflow también en release: es dinero real.
+overflow-checks = true

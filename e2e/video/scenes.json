@@ -1,0 +1,242 @@
+[
+  {
+    "id": "s01-title",
+    "en": "Meet Tesorero: an AI treasurer that pays your suppliers on any blockchain, but only inside the rules you set. Any business can sign up in minutes, and each one gets its own private organization.",
+    "es": "Les presentamos Tesorero: un tesorero con inteligencia artificial que paga a tus proveedores en cualquier blockchain, pero sólo dentro de las reglas que tú defines. Cualquier negocio puede registrarse en minutos, y cada uno tiene su propia organización privada."
+  },
+  {
+    "id": "s02-landing",
+    "en": "Everything starts at tesorero.gesco.ec. The landing explains how it works, the guardrails and the roles, and plays this very video in English or Spanish. From here, anyone can try the live demo or create their own organization.",
+    "es": "Todo empieza en tesorero.gesco.ec. La página de inicio explica cómo funciona, sus barreras de seguridad y los roles, y reproduce este mismo video en inglés o en español. Desde aquí, cualquiera puede probar la demo en vivo o crear su propia organización."
+  },
+  {
+    "id": "s03-login",
+    "en": "The live demo is an organization of its own, Cafetería La Ceiba, a small coffee shop. Valentina owns it. The demo login offers a one-click account for each role: Owner, Approver and Auditor. She signs in as the Owner.",
+    "es": "La demo en vivo es una organización más: la Cafetería La Ceiba, una pequeña cafetería. Valentina es la dueña. El acceso de la demo ofrece una cuenta de un clic para cada rol: Owner, Approver y Auditor. Ella entra como Owner."
+  },
+  {
+    "id": "s04-overview",
+    "en": "The overview puts what matters first: today's and this month's spending against the limits, budgets by category, upcoming bills, and the last agent run. This demo runs in Simulation mode, so no real money moves here.",
+    "es": "La vista general pone primero lo importante: el gasto de hoy y del mes frente a los límites, los presupuestos por categoría, las próximas facturas y la última ejecución del agente. Esta demo funciona en modo Simulación, así que aquí no se mueve dinero real."
+  },
+  {
+    "id": "s05-palette",
+    "en": "Everything is one keystroke away. With Control K she opens the command palette and jumps straight to Payees.",
+    "es": "Todo está a un atajo de distancia. Con Control K abre la paleta de comandos y salta directamente a Beneficiarios."
+  },
+  {
+    "id": "s06-payees",
+    "en": "Payees are the people and companies she pays, and each one chooses its own chain and token: USDC on Base, on Solana or on Arbitrum, SOL, or USDT on Ethereum. Pacific Freight changed its address three hours ago, so it is in a forty-eight hour cool-down.",
+    "es": "Los beneficiarios son las personas y empresas a las que paga, y cada uno elige su propia cadena y token: USDC en Base, en Solana o en Arbitrum, SOL, o USDT en Ethereum. Pacific Freight cambió su dirección hace tres horas, así que está en un periodo de espera de cuarenta y ocho horas."
+  },
+  {
+    "id": "s07-payee-invalid",
+    "en": "A new supplier, Quito Bakery, wants USDC on Base. Valentina picks the token from the NEAR Intents catalog and, by mistake, pastes an incomplete address. Tesorero catches it before saving.",
+    "es": "Un nuevo proveedor, Panadería Quito, quiere cobrar en USDC sobre Base. Valentina elige el token del catálogo de NEAR Intents y, por error, pega una dirección incompleta. Tesorero lo detecta antes de guardar."
+  },
+  {
+    "id": "s08-payee-valid",
+    "en": "With the right address, Tesorero asks NEAR Intents for a test quote to that exact destination. Only if the route works is the payee saved.",
+    "es": "Con la dirección correcta, Tesorero pide a NEAR Intents una cotización de prueba hacia ese destino exacto. Sólo si la ruta funciona se guarda el beneficiario."
+  },
+  {
+    "id": "s09-import-normal",
+    "en": "Next, bills. Invoices arrive by e-mail, so instead of typing them, Valentina pastes the text and lets the AI read it.",
+    "es": "Ahora, las facturas. Llegan por correo, así que en lugar de teclearlas, Valentina pega el texto y deja que la inteligencia artificial lo lea."
+  },
+  {
+    "id": "s10-extraction-clean",
+    "en": "The AI extracts the supplier, amount, due date and reference, and matches the payee already on file. No warnings, so she creates the bill with one click.",
+    "es": "La IA extrae el proveedor, el monto, el vencimiento y la referencia, y lo vincula con el beneficiario registrado. No hay alertas, así que crea la factura con un clic."
+  },
+  {
+    "id": "s11-import-malicious",
+    "en": "Then a suspicious invoice arrives. It looks like it comes from the same roaster, but it hides instructions for the AI and asks to pay a brand-new wallet.",
+    "es": "Luego llega una factura sospechosa. Parece venir del mismo tostador, pero esconde instrucciones para la IA y pide pagar a una billetera nueva."
+  },
+  {
+    "id": "s12-warnings",
+    "en": "Tesorero flags both problems: a possible prompt injection, and a payment address that differs from the one on file, a classic invoice fraud. Tesorero only ever pays the address on file. She saves it as a flagged bill to see what the agent does.",
+    "es": "Tesorero marca ambos problemas: una posible inyección de instrucciones, y una dirección de pago distinta a la registrada, un fraude de facturas clásico. Tesorero sólo paga a la dirección registrada. Ella la guarda como factura marcada para ver qué hace el agente."
+  },
+  {
+    "id": "s13-policies",
+    "en": "The rules live in Policies: a maximum per payment, daily and monthly limits, an auto-approval threshold, a minimum reserve, the allowlist, the address cool-down, and budgets per category. The AI can never change them.",
+    "es": "Las reglas viven en Políticas: un máximo por pago, límites diario y mensual, un umbral de aprobación automática, una reserva mínima, la lista blanca, la espera por cambio de dirección y presupuestos por categoría. La IA nunca puede cambiarlas."
+  },
+  {
+    "id": "s14-agent-run",
+    "en": "Time for the daily run. Valentina asks the agent to plan today's payments. The AI only proposes; a deterministic policy engine decides every single one.",
+    "es": "Llega la ejecución diaria. Valentina le pide al agente que planifique los pagos de hoy. La IA sólo propone; un motor de políticas determinista decide cada uno."
+  },
+  {
+    "id": "s15-agent-results",
+    "en": "Each decision comes as a reasoning card: what the AI proposed and why, next to the policy verdict and every rule it checked. Routine bills that are due soon are approved automatically. The large design milestone, and the freight company whose address just changed, go to a human. The poisoned invoice is not paid.",
+    "es": "Cada decisión llega como una tarjeta de razonamiento: qué propuso la IA y por qué, junto al veredicto de las políticas y cada regla evaluada. Las facturas rutinarias que vencen pronto se aprueban solas. El hito de diseño, por ser grande, y la naviera que acaba de cambiar su dirección, pasan a un humano. La factura envenenada no se paga."
+  },
+  {
+    "id": "s16-payments",
+    "en": "Approved payments settle right away in Simulation, each with a real quote from NEAR Intents: USDC on NEAR goes in, and the payee's token comes out on the payee's chain.",
+    "es": "Los pagos aprobados se liquidan al instante en Simulación, cada uno con una cotización real de NEAR Intents: entra USDC sobre NEAR y sale el token del beneficiario en su propia cadena."
+  },
+  {
+    "id": "s17-payment-detail",
+    "en": "The detail shows what was sent, what the payee receives, the route, and who decided and why. In Live mode it also links to the treasury contract transaction and to the NEAR Intents explorer.",
+    "es": "El detalle muestra lo enviado, lo que recibe el beneficiario, la ruta, y quién decidió y por qué. En modo real también enlaza a la transacción del contrato de tesorería y al explorador de NEAR Intents."
+  },
+  {
+    "id": "s18-drill",
+    "en": "But what if the AI itself were compromised? The red-team drill simulates an agent that tries to pay every open bill at once. Nothing is created and nothing moves.",
+    "es": "¿Y si la propia IA estuviera comprometida? La prueba de seguridad simula un agente que intenta pagar todas las facturas abiertas a la vez. No se crea nada y no se mueve nada."
+  },
+  {
+    "id": "s19-drill-results",
+    "en": "The guardrails hold. The poisoned invoice is blocked for suspicious instructions and for exceeding the maximum, and the new ad agency is blocked because it is not on the allowlist.",
+    "es": "Las barreras resisten. La factura envenenada se bloquea por instrucciones sospechosas y por superar el máximo, y la nueva agencia de publicidad se bloquea porque no está en la lista blanca."
+  },
+  {
+    "id": "s20-approver",
+    "en": "Now Mateo, the Approver, signs in. His inbox shows only what the guardrails sent to a human, with the full reasoning.",
+    "es": "Ahora entra Mateo, el Approver. Su bandeja muestra sólo lo que las barreras enviaron a un humano, con todo el razonamiento."
+  },
+  {
+    "id": "s21-approve",
+    "en": "The design milestone was delivered, so he approves it with one click. The payment goes through immediately, and his decision is recorded.",
+    "es": "El hito de diseño ya fue entregado, así que lo aprueba con un clic. El pago se procesa de inmediato y su decisión queda registrada."
+  },
+  {
+    "id": "s22-reject",
+    "en": "The freight company's new address hasn't been confirmed by phone, so he rejects it and explains why. The bill goes back to the queue.",
+    "es": "La nueva dirección de la naviera no se ha confirmado por teléfono, así que la rechaza y explica el motivo. La factura vuelve a la cola."
+  },
+  {
+    "id": "s23-approver-limits",
+    "en": "Mateo can add bills and decide approvals, but he cannot touch payees, rules or the agent. Those buttons stay visible but disabled, and say which role is needed.",
+    "es": "Mateo puede crear facturas y decidir aprobaciones, pero no puede tocar beneficiarios, reglas ni el agente. Esos botones siguen visibles pero deshabilitados, e indican qué rol se necesita."
+  },
+  {
+    "id": "s24-auditor",
+    "en": "Lucía, the accountant, has read-only access. She reviews the payments ledger and exports a clean CSV for the books.",
+    "es": "Lucía, la contadora, tiene acceso de sólo lectura. Revisa el registro de pagos y exporta un CSV limpio para la contabilidad."
+  },
+  {
+    "id": "s25-audit-log",
+    "en": "The audit log records every action by people, by the agent and by the system: who approved what, every AI proposal, every blocked attempt, and every change to the rules.",
+    "es": "El registro de auditoría guarda cada acción de las personas, del agente y del sistema: quién aprobó qué, cada propuesta de la IA, cada intento bloqueado y cada cambio en las reglas."
+  },
+  {
+    "id": "s26-demo-protected",
+    "en": "On the public demo, the shared accounts are protected, so no visitor can lock the others out by changing a password.",
+    "es": "En la demo pública, las cuentas compartidas están protegidas, así que ningún visitante puede bloquear a los demás cambiando una contraseña."
+  },
+  {
+    "id": "s27-users",
+    "en": "Back as the Owner, Valentina manages her team. She invites a new bookkeeper with a strong temporary password generated for her.",
+    "es": "De vuelta como Owner, Valentina gestiona su equipo. Invita a un nuevo contable con una contraseña temporal segura generada automáticamente."
+  },
+  {
+    "id": "s28-deactivate",
+    "en": "When someone leaves, she deactivates them and their open sessions end immediately. There is always at least one active Owner.",
+    "es": "Cuando alguien se va, lo desactiva y sus sesiones abiertas terminan de inmediato. Siempre queda al menos un Owner activo."
+  },
+  {
+    "id": "s29-kill-switch",
+    "en": "In an emergency, one red button stops every payment at once, even the ones already approved. Nothing leaves until the owner resumes, and the money is never touched.",
+    "es": "En una emergencia, un botón rojo detiene todos los pagos a la vez, incluso los ya aprobados. No sale nada hasta que la dueña los reanude, y el dinero nunca se toca."
+  },
+  {
+    "id": "s30-settings",
+    "en": "Settings show what kind of organization this is. This is the public demo, so Live mode is locked: real money never moves here. When the tour is over, the owner resets the demo for the next visitor.",
+    "es": "Los ajustes muestran qué tipo de organización es. Esta es la demo pública, así que el modo real está bloqueado: aquí nunca se mueve dinero real. Al terminar el recorrido, el dueño reinicia la demo para el siguiente visitante."
+  },
+  {
+    "id": "s31-language-theme",
+    "en": "Tesorero speaks English and Spanish, and works in light and dark mode.",
+    "es": "Tesorero habla inglés y español, y funciona en modo claro y oscuro."
+  },
+  {
+    "id": "s32-mobile",
+    "en": "It is also an installable app that updates itself with every release. On a phone, the same tools fit in your hand: overview, approvals, payments and more.",
+    "es": "También es una aplicación instalable que se actualiza sola con cada versión. En el teléfono, las mismas herramientas caben en tu mano: resumen, aprobaciones, pagos y más."
+  },
+  {
+    "id": "s33-signup",
+    "en": "For real money, each business gets its own organization, fully isolated from the demo and from everyone else. Ana, who runs a bakery, signs up on the landing. Her own subdomain is suggested from the name and checked as she types.",
+    "es": "Para dinero real, cada negocio tiene su propia organización, totalmente aislada de la demo y de los demás. Ana, que tiene una panadería, se registra en la página de inicio. Su propio subdominio se sugiere a partir del nombre y se comprueba mientras escribe."
+  },
+  {
+    "id": "s34-signup-near",
+    "en": "Tesorero also looks up her NEAR account on mainnet. A typo is caught at once, and her real account is confirmed. She accepts the terms and sends the form.",
+    "es": "Tesorero también busca su cuenta NEAR en la red principal. Un error de escritura se detecta al instante, y su cuenta real queda confirmada. Acepta los términos y envía el formulario."
+  },
+  {
+    "id": "s35-verify-email",
+    "en": "Nothing is created until she proves the e-mail is hers. The verification message arrives, and she confirms with one click. The link works once and expires in a day.",
+    "es": "No se crea nada hasta que demuestra que el correo es suyo. Llega el mensaje de verificación y lo confirma con un clic. El enlace funciona una sola vez y vence en un día."
+  },
+  {
+    "id": "s36-verified",
+    "en": "Only now, after checking the subdomain and the NEAR account again, is Panadería Sol created at its own address, with a conservative policy and its own agent account. A second e-mail brings the setup link.",
+    "es": "Sólo ahora, tras comprobar de nuevo el subdominio y la cuenta NEAR, se crea Panadería Sol en su propia dirección, con una política conservadora y su propia cuenta de agente. Un segundo correo trae el enlace de alta."
+  },
+  {
+    "id": "s37-setup",
+    "en": "The setup link is single-use, expires in seven days, and only accepts the verified e-mail, so nobody else can claim the treasury. Ana chooses her password and becomes the first Owner.",
+    "es": "El enlace de alta es de un solo uso, vence en siete días y sólo acepta el correo verificado, así que nadie más puede reclamar la tesorería. Ana elige su contraseña y se convierte en la primera Owner."
+  },
+  {
+    "id": "s38-real-created",
+    "en": "Her workspace starts clean: no sample data and nothing from any other organization. The rules start conservative: five hundred dollars per payment, a thousand a day, and anything over one hundred needs a human.",
+    "es": "Su espacio empieza limpio: sin datos de ejemplo y sin nada de otras organizaciones. Las reglas empiezan conservadoras: quinientos dólares por pago, mil al día, y todo lo que pase de cien necesita a un humano."
+  },
+  {
+    "id": "s39-real-settings",
+    "en": "Her settings show the agent account created for her organization. Its private key is generated on the server, stored encrypted, and never leaves it. Now she sets up her real treasury, from the app.",
+    "es": "Sus ajustes muestran la cuenta de agente creada para su organización. Su clave privada se genera en el servidor, se guarda cifrada y nunca sale de él. Ahora prepara su tesorería real, desde la aplicación."
+  },
+  {
+    "id": "s40-treasury-accounts",
+    "en": "The Treasury page explains where the money lives, in plain words. Her own wallet stays hers. The treasury is a locked contract that holds the USDC. The agent only signs payments and never holds money. In this recording, a local NEAR network stands in for mainnet; the transactions are exactly the same.",
+    "es": "La página de Tesorería explica, en palabras simples, dónde vive el dinero. Su billetera sigue siendo suya. La tesorería es un contrato bloqueado que guarda los USDC. El agente sólo firma los pagos y nunca tiene dinero. En esta grabación, una red NEAR local reemplaza a la red principal; las transacciones son exactamente las mismas."
+  },
+  {
+    "id": "s41-treasury-prepare",
+    "en": "She names her wallet as the owner and sets the on-chain limits: fifty dollars per payment, one hundred per day. Even if the server were hacked, nothing could leave beyond that. Tesorero gives her one address to send two and a half NEAR to, from her wallet or from Binance.",
+    "es": "Indica su billetera como dueña y fija los límites on-chain: cincuenta dólares por pago y cien al día. Aunque hackearan el servidor, no podría salir más que eso. Tesorero le da una sola dirección para enviar dos coma cinco NEAR, desde su billetera o desde Binance."
+  },
+  {
+    "id": "s42-treasury-create",
+    "en": "The deposit arrives and she creates her treasury. In seconds the audited contract is deployed with her as owner, registered for USDC, the agent gets gas, and the one-time key deletes itself. Every step links to its transaction.",
+    "es": "Llega el depósito y crea su tesorería. En segundos se despliega el contrato auditado con ella como dueña, se registra en USDC, el agente recibe gas y la clave de un solo uso se borra sola. Cada paso enlaza a su transacción."
+  },
+  {
+    "id": "s43-treasury-fund",
+    "en": "To add funds she can send USDC on NEAR, or USDT from Binance on BNB Smart Chain: NEAR Intents gives her the exact network, address and amount, and converts it into USDC inside her treasury. Here she sends thirty USDC from her wallet.",
+    "es": "Para agregar fondos puede enviar USDC en NEAR, o USDT desde Binance por BNB Smart Chain: NEAR Intents le da la red, la dirección y el monto exactos, y lo convierte en USDC dentro de su tesorería. Aquí envía treinta USDC desde su billetera."
+  },
+  {
+    "id": "s44-go-live",
+    "en": "Every check is green, so she switches to Live. Tesorero verifies the contract again and asks her to confirm, showing the limits the agent will respect.",
+    "es": "Todas las comprobaciones están en verde, así que pasa a modo real. Tesorero verifica de nuevo el contrato y le pide confirmar, mostrando los límites que respetará el agente."
+  },
+  {
+    "id": "s45-real-payment",
+    "en": "Her first supplier is new, so the first payment needs her approval. She approves it, and the agent signs the payment through the treasury contract. Twelve dollars leave the treasury, on-chain, and NEAR Intents takes them to the supplier's chain.",
+    "es": "Su primer proveedor es nuevo, así que el primer pago necesita su aprobación. Lo aprueba, y el agente firma el pago a través del contrato de tesorería. Doce dólares salen de la tesorería, on-chain, y NEAR Intents los lleva a la cadena del proveedor."
+  },
+  {
+    "id": "s46-owner-wallet",
+    "en": "Withdrawing, resuming after a freeze, or changing the on-chain limits needs her own wallet's signature, from the same page, with one button. Not even Tesorero can do it for her.",
+    "es": "Retirar, reanudar tras un congelamiento o cambiar los límites on-chain requiere la firma de su propia billetera, desde la misma página, con un botón. Ni siquiera Tesorero puede hacerlo por ella."
+  },
+  {
+    "id": "s47-contract",
+    "en": "Her USDC lives in the Tesorero treasury contract on NEAR. The contract lets the agent pay only within the per-payment and daily limits set from her wallet, rejects duplicate payments, and can be paused at any time. Even a compromised server can never move more than the daily limit.",
+    "es": "Su USDC vive en el contrato de tesorería de Tesorero en NEAR. El contrato sólo deja pagar al agente dentro de los límites por pago y diarios fijados desde su billetera, rechaza pagos duplicados y puede pausarse en cualquier momento. Ni siquiera un servidor comprometido puede mover más que el límite diario."
+  },
+  {
+    "id": "s48-closing",
+    "en": "Tesorero. The AI proposes, the rules decide, humans approve the exceptions, and NEAR Intents pays on any chain. Try it at tesorero.gesco.ec. Built at NEAR HACKATHON.",
+    "es": "Tesorero. La IA propone, las reglas deciden, los humanos aprueban las excepciones y NEAR Intents paga en cualquier cadena. Pruébalo en tesorero.gesco.ec. Construido en NEAR HACKATHON."
+  }
+]

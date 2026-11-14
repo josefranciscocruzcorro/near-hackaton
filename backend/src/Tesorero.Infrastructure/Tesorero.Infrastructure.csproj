@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>Tesorero.Infrastructure</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tesorero.Application\Tesorero.Application.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Audited treasury contract (ADR-0007); sha256 24710670…0b19, checked at startup and on-chain. -->
+    <EmbeddedResource Include="Near\Contract\tesorero_treasury.wasm" LogicalName="Tesorero.TreasuryContract.wasm" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Hangfire.Core" />
+    <PackageReference Include="Hangfire.AspNetCore" />
+    <PackageReference Include="Hangfire.PostgreSql" />
+    <PackageReference Include="BouncyCastle.Cryptography" />
+    <PackageReference Include="MailKit" />
+  </ItemGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Tesorero.UnitTests" />
+    <InternalsVisibleTo Include="Tesorero.LiveAiTests" />
+  </ItemGroup>
+</Project>

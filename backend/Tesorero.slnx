@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Tesorero.Domain/Tesorero.Domain.csproj" />
+    <Project Path="src/Tesorero.Application/Tesorero.Application.csproj" />
+    <Project Path="src/Tesorero.Infrastructure/Tesorero.Infrastructure.csproj" />
+    <Project Path="src/Tesorero.Api/Tesorero.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Tesorero.UnitTests/Tesorero.UnitTests.csproj" />
+    <Project Path="tests/Tesorero.IntegrationTests/Tesorero.IntegrationTests.csproj" />
+    <Project Path="tests/Tesorero.LiveAiTests/Tesorero.LiveAiTests.csproj" />
+  </Folder>
+</Solution>

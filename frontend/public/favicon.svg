@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Tesorero">
+  <rect width="64" height="64" rx="14" fill="#0E9F6E"/>
+  <path d="M32 11 50 18v13c0 11.5-7.6 19.4-18 22.6C21.6 50.4 14 42.5 14 31V18z" fill="#FFFFFF" opacity="0.16"/>
+  <path d="M21 22h22v6h-8v20h-6V28h-8z" fill="#FFFFFF"/>
+  <circle cx="44" cy="44" r="6" fill="#FFFFFF"/>
+  <circle cx="44" cy="44" r="2.6" fill="#0E9F6E"/>
+</svg>
